@@ -4,8 +4,9 @@
 
   "capabilities": {
     "build": "pytest-bdd-browserstack",
-    "name": "single_test",
-    "browserstack.debug": true
+    "name": "local_test",
+    "browserstack.debug": true,
+    "browserstack.local": true
   },
 
   "environments": [{

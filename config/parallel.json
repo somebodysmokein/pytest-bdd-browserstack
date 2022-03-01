@@ -1,0 +1,37 @@
+{
+  "user": "BROWSERSTACK_USERNAME",
+  "key": "BROWSERSTACK_ACCESS_KEY",
+  "capabilities": {
+    "build": "pytest-bdd-browserstack",
+    "name": "parallel_test",
+    "browserstack.debug": true
+  },
+  "environments": [
+    {
+      "os": "Windows",
+      "os_version": "10",
+      "browser": "Chrome",
+      "browser_version": "latest"
+    },
+    {
+      "os": "Windows",
+      "os_version": "10",
+      "browser": "firefox",
+      "browser_version": "latest"
+    },
+    {
+      "os": "Windows",
+      "os_version": "10",
+      "browser": "IE",
+      "browser_version": "latest",
+      "browserstack.selenium_version": "3.14.0",
+      "browserstack.ie.driver": "3.14.0"
+    },
+    {
+      "os": "OS X",
+      "os_version": "Monterey",
+      "browser": "Safari",
+      "browser_version": "15.0"
+    }
+  ]
+}

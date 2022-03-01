@@ -1,0 +1,12 @@
+{
+  "capabilities": {
+    "os": "Windows",
+    "os_version": "10",
+    "browser": "Chrome",
+    "browser_version": "latest",
+    "project": "GoogleSearch",
+    "build": "<BUILD_NAME>",
+    "name" : "jenkins-integration",
+    "browserstack.local": "<LOCAL_IND>"
+  }
+}
