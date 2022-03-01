@@ -1,7 +1,7 @@
 # pytest-bdd-browserstack-example
 Example project for executing pytest-bdd framework on BrowserStack
 
-[pytest-bdd] Integration with BrowserStack.
+[pytest-bdd](https://github.com/pytest-dev/pytest-bdd) Integration with BrowserStack.
 
 ![BrowserStack Logo](https://d98b8t1nnulk5.cloudfront.net/production/images/layout/logo-header.png?1469004780)
 
