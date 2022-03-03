@@ -16,9 +16,9 @@ setup(
 
 def run_pytest_bdd(config, feature, task_id=0):
     if platform.system() == 'Windows':
-        sh('SET CONFIG_FILE=config/%s.json & SET TASK_ID=%s & pytest test/step_defs/%s.py -v' % (config, task_id, feature))
+        sh('SET CONFIG_FILE=config/%s.json & SET TASK_ID=%s & pytest test/step_defs/%s.py -v -s' % (config, task_id, feature))
     else:
-        sh('export CONFIG_FILE=config/%s.json && export TASK_ID=%s && pytest test/step_defs/%s.py -v' % (config, task_id, feature))
+        sh('export CONFIG_FILE=config/%s.json && export TASK_ID=%s && pytest test/step_defs/%s.py -v -s' % (config, task_id, feature))
 
 @task
 @consume_nargs(2)

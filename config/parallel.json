@@ -4,7 +4,8 @@
   "capabilities": {
     "build": "pytest-bdd-browserstack",
     "name": "parallel_test",
-    "browserstack.debug": true
+    "browserstack.debug": true,
+    "browserstack.local": true
   },
   "environments": [
     {

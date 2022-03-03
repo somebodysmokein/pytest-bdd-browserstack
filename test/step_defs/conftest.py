@@ -1,10 +1,8 @@
 import json
 import os
 import sys
-
 import pytest
 from selenium import webdriver
-
 from test.step_defs.environment import start_local, stop_local
 
 config_file_path = os.environ['CONFIG_FILE'] if 'CONFIG_FILE' in os.environ else 'config/single.json'
@@ -22,7 +20,9 @@ if not (USERNAME and BROWSERSTACK_ACCESS_KEY):
     raise Exception("Please provide your BrowserStack username and access key")
 
 
-@pytest.fixture(scope="session")
+# Instantiate the Webdriver module with BrowserStack Capabilities
+
+@pytest.fixture()
 def browser():
     url = "https://%s:%s@hub.browserstack.com/wd/hub" % (
         USERNAME, BROWSERSTACK_ACCESS_KEY
@@ -38,24 +38,38 @@ def browser():
         desired_capabilities["build"] = os.getenv("BROWSERSTACK_BUILD_NAME")
 
     if "browserstack.local" in desired_capabilities and desired_capabilities["browserstack.local"]:
+        desired_capabilities["browserstack.localIdentifier"] = USERNAME + "_" + str(TASK_ID)
         start_local()
     b = webdriver.Remote(command_executor=url, desired_capabilities=desired_capabilities)
-    b.implicitly_wait(10)
+
     yield b
     b.quit()
     if "browserstack.local" in desired_capabilities and desired_capabilities["browserstack.local"]:
         stop_local()
 
 
+# Enter any code that has to run before scenario is called
 def pytest_bdd_before_scenario(request, feature, scenario):
     print("inside pytest_bdd_before_scenario")
 
 
+# Once the step completes successfully, get the fixture which has the driver object and mark the test as failure
 def pytest_bdd_after_step(request, feature, scenario, step, step_func, step_func_args):
-    print("inside pytest_bdd_after_step")
-    print('Step passed: {step}')
+    print("Step passed: inside pytest_bdd_after_step")
+    print(step)
+    # updateTestResults(browser, "pass")
+    context = request.getfixturevalue('browser')
+    context.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {'
+                           '"status":"passed", "reason": "All assertions passed"}}')
 
 
+# If one of the assertion fails, get the fixture which has the driver object and mark the test as failure
 def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):
-    print("inside pytest_bdd_step_error")
-    print('Step failed: {step} due to exception {exception}')
+    print("Step Failed: inside pytest_bdd_step_error")
+    print(step)
+    print(exception)
+    # updateTestResults(browser, "failed")
+    context = request.getfixturevalue('browser')
+    context.execute_script(
+        'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "At '
+        'least 1 assertion failed"}}')
