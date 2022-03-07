@@ -1,12 +1,17 @@
 {
+  "user": "BROWSERSTACK_USERNAME",
+  "key": "BROWSERSTACK_ACCESS_KEY",
+
   "capabilities": {
+    "build": "pytest-bdd-browserstack",
+    "name": "single_test",
+    "browserstack.debug": true
+  },
+
+  "environments": [{
     "os": "Windows",
     "os_version": "10",
     "browser": "Chrome",
-    "browser_version": "latest",
-    "project": "GoogleSearch",
-    "build": "pytest-bdd-build",
-    "name" : "single-test",
-    "browserstack.local": "true"
-  }
+    "browser_version": "latest"
+  }]
 }
