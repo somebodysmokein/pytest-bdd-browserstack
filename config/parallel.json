@@ -1,6 +1,7 @@
 {
   "user": "BROWSERSTACK_USERNAME",
   "key": "BROWSERSTACK_ACCESS_KEY",
+  "test_type": "remote",
   "capabilities": {
     "build": "pytest-bdd-browserstack",
     "name": "parallel_test",

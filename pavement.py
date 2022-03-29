@@ -28,8 +28,9 @@ def run(args):
         run_pytest_bdd(args[0], args[1])
     else:
         jobs = []
-        for i in range(4):
+        for i in range(6):
             p = threading.Thread(target=run_pytest_bdd,args=(args[0], args[1],i))
+            #p=threading.local(target=run_pytest_bdd,args=(args[0], args[1],i))
             jobs.append(p)
             p.start()
 
